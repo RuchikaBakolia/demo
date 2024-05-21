@@ -2,17 +2,16 @@ package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
 public class Status {
-        @JsonProperty("description")
-        private String description;
+    @JsonProperty("description")
+    private String description;
 
-        @JsonProperty("indicator")
-        private String indicator;
+    @JsonProperty("indicator")
+    private String indicator;
 
     public String getDescription() {
         return description;

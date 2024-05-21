@@ -16,13 +16,12 @@ import java.util.Map;
 @Service
 public class NewRelicService {
 
-//    @Value("${newrelic.key}")
-//    private String newRelicKey;
+    @Value("${newrelic.key}")
+    private String newRelicKey;
 
     public void sendEvent(String name, Map<String, String> attributes) {
         Attributes eventAttributes = new Attributes();
         attributes.forEach(eventAttributes::put);
-
         Event event = new Event(name, eventAttributes);
         getClient().sendBatch(new EventBatch(Collections.singleton(event)));
     }
@@ -30,6 +29,6 @@ public class NewRelicService {
     private TelemetryClient getClient() {
         return TelemetryClient.create(
                 () -> new OkHttpPoster(Duration.of(10, ChronoUnit.SECONDS)),
-                "5de0a66f5e0d5b52a61948dfa7abe821FFFFNRAL");
+                newRelicKey);
     }
 }

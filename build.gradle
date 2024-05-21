@@ -14,18 +14,10 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	// https://mvnrepository.com/artifact/com.newrelic.telemetry/telemetry
 	implementation 'com.newrelic.telemetry:telemetry:0.10.0'
-	// https://mvnrepository.com/artifact/com.newrelic.telemetry/telemetry-http-okhttp
 	implementation 'com.newrelic.telemetry:telemetry-http-okhttp:0.16.0'
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 
-// https://mvnrepository.com/artifact/org.projectlombok/lombok
-	compileOnly 'org.projectlombok:lombok:1.18.30'
-
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-
-test {
-	useJUnitPlatform()
 }

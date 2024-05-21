@@ -1,12 +1,15 @@
-package com.example.demo.service;
+package com.example.demo.scheduler;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import com.example.demo.model.GitHubStatus;
+import com.example.demo.service.GitHubStatusService;
+import com.example.demo.service.NewRelicService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class ScheduledTaskService {
 
@@ -19,10 +22,8 @@ public class ScheduledTaskService {
     @Scheduled(fixedRate = 10000) // Run every 10 seconds
     public void collectAndSendMetrics() {
         GitHubStatus status = gitHubStatusService.fetchGitHubStatus();
-        System.out.println(status.toString());
         newRelicService.sendEvent("GithubStatus", Map.of("indicator", status.getStatus().getIndicator(),
                 "description", status.getStatus().getDescription()));
-
-        System.out.println("Event collected and sent to New Relic");
+        log.info("Event collected and sent to New Relic");
     }
 }
